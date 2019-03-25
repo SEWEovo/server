@@ -21,9 +21,13 @@
     select * from userbasic
     where account= #{account} and password= #{password}
   </select>
+  <select id="findAll" parameterType="com.admin.demo.data.UserBasicDO" resultMap="BaseResultMap">
+    select * from userbasic
+    where type=1
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from userbasic
-    where id = #{id,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.admin.demo.data.UserBasicDO">
     insert into userbasic (id, user_id, account, 
@@ -88,10 +92,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.admin.demo.data.UserBasicDO">
     update userbasic
-    set user_id = #{userId,jdbcType=INTEGER},
-      account = #{account,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
+    set
       type = #{type,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
   </update>
 </mapper>

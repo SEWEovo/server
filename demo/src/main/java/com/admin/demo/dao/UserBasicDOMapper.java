@@ -18,5 +18,7 @@ public interface UserBasicDOMapper {
 
     int updateByPrimaryKey(UserBasicDO record);
 
-    List<UserBasicDO> login(@Param("account") String account,@Param("password") String password);
+    UserBasicDO login(@Param("account") String account,@Param("password") String password);
+
+    List<UserBasicDO> findAll();
 }

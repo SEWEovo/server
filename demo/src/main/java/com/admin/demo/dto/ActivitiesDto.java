@@ -2,13 +2,9 @@ package com.admin.demo.dto;
 
 import java.util.List;
 
-
-public class UserDto {
+public class ActivitiesDto {
 
     private List<?> list;
-    private String code;
-    private String msg;
-    private Object data;
 
     public List<?> getList() {
         return list;
@@ -42,6 +38,8 @@ public class UserDto {
         this.data = data;
     }
 
-
+    private String code;
+    private String msg;
+    private Object data;
 
 }
