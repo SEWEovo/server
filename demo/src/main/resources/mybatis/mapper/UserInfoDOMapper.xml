@@ -8,7 +8,7 @@
     <result column="college" jdbcType="VARCHAR" property="college" />
     <result column="profession" jdbcType="VARCHAR" property="profession" />
     <result column="class_num" jdbcType="INTEGER" property="classNum" />
-    <result column="phone" jdbcType="INTEGER" property="phone" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
   </resultMap>
   <sql id="Base_Column_List">
     id, user_id, name, college, profession, class_num, phone
@@ -17,7 +17,7 @@
     select 
     <include refid="Base_Column_List" />
     from userinfo
-    where id = #{id,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from userinfo
@@ -29,7 +29,7 @@
       phone)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
       #{college,jdbcType=VARCHAR}, #{profession,jdbcType=VARCHAR}, #{classNum,jdbcType=INTEGER}, 
-      #{phone,jdbcType=INTEGER})
+      #{phone,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.admin.demo.data.UserInfoDO">
     insert into userinfo
@@ -76,7 +76,7 @@
         #{classNum,jdbcType=INTEGER},
       </if>
       <if test="phone != null">
-        #{phone,jdbcType=INTEGER},
+        #{phone,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -99,19 +99,15 @@
         class_num = #{classNum,jdbcType=INTEGER},
       </if>
       <if test="phone != null">
-        phone = #{phone,jdbcType=INTEGER},
+        phone = #{phone,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.admin.demo.data.UserInfoDO">
     update userinfo
-    set user_id = #{userId,jdbcType=INTEGER},
-      name = #{name,jdbcType=VARCHAR},
-      college = #{college,jdbcType=VARCHAR},
-      profession = #{profession,jdbcType=VARCHAR},
-      class_num = #{classNum,jdbcType=INTEGER},
+    set
       phone = #{phone,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=VARCHAR}
   </update>
 </mapper>

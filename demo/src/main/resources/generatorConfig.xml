@@ -40,7 +40,7 @@
         </javaClientGenerator>
 
         <!-- 用户表 -->
-        <table schema="volunteer" tableName="userinfo" domainObjectName="UserInfoDO"
+        <table schema="volunteer" tableName="rule" domainObjectName="RuleDO"
                enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false"

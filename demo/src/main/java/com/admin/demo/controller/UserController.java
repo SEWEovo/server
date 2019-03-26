@@ -1,6 +1,7 @@
 package com.admin.demo.controller;
 
 import com.admin.demo.data.UserBasicDO;
+import com.admin.demo.data.UserInfoDO;
 import com.admin.demo.dto.UserDto;
 import com.admin.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,10 +45,18 @@ public class UserController {
          userBasicDO.setUserId(userId);
          return userService.del(userBasicDO);
      }
-    // @ResponseBody
-    // @GetMapping("/findOneInfo")
-    // public UserInfoDto findOneInfo(HttpServletRequest request, @RequestParam(required= false) Integer id){
-    //     return userService.findOneInfo(id);
-    // }
+     @ResponseBody
+    @GetMapping("/findOneInfo")
+    public UserDto findOneInfo(HttpServletRequest request, @RequestParam(required= false) Integer userId){
+        return userService.selectInfo(userId);
+    }
+    @ResponseBody
+    @PostMapping("/updateInfo")
+    public UserDto updateInfo(HttpServletRequest request, @RequestParam(required= false) Integer userId,@RequestParam(required= false) String phone){
+        UserInfoDO userInfoDO=new UserInfoDO();
+        userInfoDO.setUserId(userId);
+        userInfoDO.setPhone(phone);
+        return userService.updateInfo(userInfoDO);
+    }
 
 }

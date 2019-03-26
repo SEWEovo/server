@@ -13,12 +13,11 @@ import java.util.List;
 @Service
 public class ActivitiesServiceImpl implements ActivitiesService {
         @Autowired(required = true)
-        private ActivitiesDOMapper ActivitiesDOMapper;
+        private ActivitiesDOMapper activitiesDOMapper;
         @Override
-        public ActivitiesDto selectAll(){
-             ActivitiesDO u =new ActivitiesDO();
+        public ActivitiesDto selectAll(ActivitiesDO activitiesDO){
              List<ActivitiesDO> list = new ArrayList<ActivitiesDO>();
-             list =ActivitiesDOMapper.selectAll();
+             list =activitiesDOMapper.selectAll(activitiesDO);
              ActivitiesDto ActivitiesDto=new ActivitiesDto();
              if(list.size()!=0){
                  ActivitiesDto.setCode("ACK");
@@ -30,10 +29,23 @@ public class ActivitiesServiceImpl implements ActivitiesService {
              }
              return  ActivitiesDto;
         }
+    @Override
+    public ActivitiesDto publish(ActivitiesDO ac){
+        int result =activitiesDOMapper.insert(ac);
+        ActivitiesDto ActivitiesDto=new ActivitiesDto();
+        if(result!=0){
+            ActivitiesDto.setCode("ACK");
+            ActivitiesDto.setMsg("发布成功");
+        }else {
+            ActivitiesDto.setCode("NACK");
+            ActivitiesDto.setMsg("发布失败");
+        }
+        return  ActivitiesDto;
+    }
         @Override
         public ActivitiesDto selectById(){
              ActivitiesDO u =new ActivitiesDO();
-             u =ActivitiesDOMapper.selectByPrimaryKey(1);
+             u =activitiesDOMapper.selectByPrimaryKey(1);
              ActivitiesDto ActivitiesDto=new ActivitiesDto();
              if(u==null){
                  ActivitiesDto.setCode("ACK");
@@ -44,20 +56,6 @@ public class ActivitiesServiceImpl implements ActivitiesService {
                  ActivitiesDto.setMsg("查询失败");
              }
              return  ActivitiesDto;
-        }
-        @Override
-        public int publish(){
-             ActivitiesDO u =new ActivitiesDO();
-             int result =ActivitiesDOMapper.insert(u);
-             ActivitiesDto ActivitiesDto=new ActivitiesDto();
-             if(result!=0){
-                 ActivitiesDto.setCode("ACK");
-                 ActivitiesDto.setMsg("发布成功");
-             }else {
-                 ActivitiesDto.setCode("NACK");
-                 ActivitiesDto.setMsg("发布失败");
-             }
-             return  1;
         }
         @Override
         public int edit(){

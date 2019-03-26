@@ -9,7 +9,7 @@ public class UserBasicWithInfoDO implements Serializable {
     private String college;
     private String profession;
     private Integer classNum;
-    private Integer phone;
+    private String phone;
     private Integer userId;
 
     public String getName() {
@@ -44,11 +44,11 @@ public class UserBasicWithInfoDO implements Serializable {
         this.classNum = classNum;
     }
 
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

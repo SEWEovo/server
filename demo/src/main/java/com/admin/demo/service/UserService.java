@@ -1,6 +1,7 @@
 package com.admin.demo.service;
 
 import com.admin.demo.data.UserBasicDO;
+import com.admin.demo.data.UserInfoDO;
 import com.admin.demo.dto.UserDto;
 
 public interface UserService {
@@ -13,4 +14,8 @@ public interface UserService {
     UserDto selectPermissionStudent();
     //获取没有权限的学生名单
     UserDto selectAll();
+    //获取单个学生个人信息
+    UserDto selectInfo(Integer userId);
+    //更新学生联系方式
+    UserDto updateInfo(UserInfoDO userInfoDO);
 }

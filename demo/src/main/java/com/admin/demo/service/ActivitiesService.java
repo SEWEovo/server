@@ -1,10 +1,11 @@
 package com.admin.demo.service;
 
+import com.admin.demo.data.ActivitiesDO;
 import com.admin.demo.dto.ActivitiesDto;
 
 public interface ActivitiesService {
-    int publish();
+    ActivitiesDto publish(ActivitiesDO activity);
     int edit();
-    ActivitiesDto selectAll();
+    ActivitiesDto selectAll(ActivitiesDO activitiesDO);
     ActivitiesDto selectById();
 }

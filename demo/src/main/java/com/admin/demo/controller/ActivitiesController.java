@@ -1,9 +1,13 @@
 package com.admin.demo.controller;
 
 import com.admin.demo.data.ActivitiesDO;
+import com.admin.demo.dto.ActivitiesDto;
 import com.admin.demo.service.ActivitiesService;
+import com.alibaba.fastjson.JSON;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping("/Activities")
@@ -12,11 +16,10 @@ public class ActivitiesController {
     private ActivitiesService ActivitiesService;
     @ResponseBody
     @PostMapping("/publish")
-    public ActivitiesDO publish(){
+    public ActivitiesDto publish(@RequestParam(required= false) String  activity){
+        ActivitiesDO activitiesDO = JSON.parseObject(activity, ActivitiesDO.class);
+        return ActivitiesService.publish(activitiesDO);
 
-//         return ActivitiesService.publish();
-        ActivitiesDO a=new ActivitiesDO();
-        return a;
     }
     @ResponseBody
     @PostMapping("/edit")
@@ -27,10 +30,15 @@ public class ActivitiesController {
     }
     @ResponseBody
     @GetMapping("/getAll")
-    public ActivitiesDO getAll(){
-        ActivitiesDO a=new ActivitiesDO();
-        return a;
-        // return ActivitiesService.getAll(account,password);
+    public ActivitiesDto getAll(@RequestParam(required= false) Integer id, @RequestParam(required= false) Integer status){
+        ActivitiesDO activitiesDO=new ActivitiesDO();
+        if(id!=null){
+            activitiesDO.setActivitesId(id);
+        }
+        if(status!=null){
+            activitiesDO.setStatus(status);
+        }
+         return ActivitiesService.selectAll(activitiesDO);
     }
     @ResponseBody
     @GetMapping("/getOne")

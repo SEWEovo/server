@@ -5,17 +5,18 @@ import com.admin.demo.data.ActivitiesDO;
 import java.util.List;
 
 public interface ActivitiesDOMapper {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Integer activitesId);
 
     int insert(ActivitiesDO record);
 
     int insertSelective(ActivitiesDO record);
 
-    ActivitiesDO selectByPrimaryKey(Integer id);
+    ActivitiesDO selectByPrimaryKey(Integer activitesId);
 
     int updateByPrimaryKeySelective(ActivitiesDO record);
 
     int updateByPrimaryKey(ActivitiesDO record);
 
-    List<ActivitiesDO> selectAll();
+    //根据条件获取志愿者活动
+    List<ActivitiesDO> selectAll(ActivitiesDO record);
 }
