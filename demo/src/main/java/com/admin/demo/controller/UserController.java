@@ -19,13 +19,18 @@ public class UserController {
         return userService.login(account,password);
     }
      @ResponseBody
-     @GetMapping("/findAll")
-     public UserDto findAll(){
-         return userService.findAll();
+     @GetMapping("/selectPermissionStudent")
+     public UserDto selectPermissionStudent(){
+         return userService.selectPermissionStudent();
      }
+    @ResponseBody
+    @GetMapping("/selectAll")
+    public UserDto selectAll(){
+        return userService.selectAll();
+    }
      @ResponseBody
      @PostMapping("/add")
-     public UserDto add(HttpServletRequest request, @RequestParam(required= false) String account, @RequestParam String password,@RequestParam int userId){
+     public UserDto add(HttpServletRequest request, @RequestParam(required= false) int userId){
         UserBasicDO userBasicDO=new UserBasicDO();
         userBasicDO.setType(1);
         userBasicDO.setUserId(userId);
@@ -44,9 +49,5 @@ public class UserController {
     // public UserInfoDto findOneInfo(HttpServletRequest request, @RequestParam(required= false) Integer id){
     //     return userService.findOneInfo(id);
     // }
-    // @ResponseBody
-    // @GetMapping("/findAllInfo")
-    // public UserInfoDto findAllInfo(){
-    //     return userService.findAllInfo();
-    // }
+
 }

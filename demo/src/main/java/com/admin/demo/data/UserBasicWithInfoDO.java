@@ -1,42 +1,23 @@
 package com.admin.demo.data;
 
-public class UserInfoDO {
-    private Integer id;
 
-    private Integer userId;
+import java.io.Serializable;
+
+public class UserBasicWithInfoDO implements Serializable {
 
     private String name;
-
     private String college;
-
     private String profession;
-
     private Integer classNum;
-
     private Integer phone;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+    private Integer userId;
 
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public String getCollege() {
@@ -44,7 +25,7 @@ public class UserInfoDO {
     }
 
     public void setCollege(String college) {
-        this.college = college == null ? null : college.trim();
+        this.college = college;
     }
 
     public String getProfession() {
@@ -52,7 +33,7 @@ public class UserInfoDO {
     }
 
     public void setProfession(String profession) {
-        this.profession = profession == null ? null : profession.trim();
+        this.profession = profession;
     }
 
     public Integer getClassNum() {
@@ -69,5 +50,13 @@ public class UserInfoDO {
 
     public void setPhone(Integer phone) {
         this.phone = phone;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

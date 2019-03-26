@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.admin.demo.dao.UserBasicWithInfoMapper">
+
+    <sql id="UserBasicWithInfoBaseColumns">
+        i.id as user_info_id,
+        i.name as name,
+        i.college as college,
+        i.profession as profession,
+        i.class_num as class_num,
+        i.phone as phone,
+        b.user_id as user_id,
+        b.id as user_basic_id,
+        b.account as account,
+        b.password as password,
+        b.type as type
+    </sql>
+    
+    <resultMap id="UserBasicWithInfoDOMap" type="com.admin.demo.data.UserBasicWithInfoDO">
+        <result column="name" property="name" />
+        <result column="college" property="college" />
+        <result column="profession" property="profession" />
+        <result column="class_num" property="classNum" />
+        <result column="phone" property="phone" />
+        <result column="user_id" property="userId" />
+    </resultMap>
+    
+    <select id="selectPermissionStudent" resultMap="UserBasicWithInfoDOMap">
+        select <include refid="UserBasicWithInfoBaseColumns" />
+        from userinfo i, userbasic b
+        where i.user_id = b.user_id
+        and type = 1
+    </select>
+    <select id="selectAll" resultMap="UserBasicWithInfoDOMap">
+        select <include refid="UserBasicWithInfoBaseColumns" />
+        from userinfo i, userbasic b
+        where i.user_id = b.user_id
+        and type = 0
+    </select>
+
+</mapper>

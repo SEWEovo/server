@@ -1,7 +1,9 @@
 package com.admin.demo.service.impl;
 
 import com.admin.demo.dao.UserBasicDOMapper;
+import com.admin.demo.dao.UserBasicWithInfoMapper;
 import com.admin.demo.data.UserBasicDO;
+import com.admin.demo.data.UserBasicWithInfoDO;
 import com.admin.demo.dto.UserDto;
 import com.admin.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,9 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired(required = true)
     private UserBasicDOMapper userBasicDOMapper;
+
+    @Autowired(required = true)
+    private UserBasicWithInfoMapper userBasicWithInfoMapper;
     @Override
     public UserDto login(String account,String password){
        Object u =userBasicDOMapper.login(account,password);
@@ -28,23 +33,6 @@ public class UserServiceImpl implements UserService {
         }
         return  userDto;
     }
-    //获取权限列表
-     @Override
-     public UserDto findAll(){
-         List<UserBasicDO> list = new ArrayList<UserBasicDO>();
-         list =userBasicDOMapper.findAll();
-         UserDto userDto=new UserDto();
-         if(list.size()!=0){
-             userDto.setCode("ACK");
-             userDto.setMsg("查询成功");
-//             userDto.setList(list);
-             userDto.setData(list);
-         }else {
-             userDto.setCode("NACK");
-             userDto.setMsg("查询失败");
-         }
-         return  userDto;
-     }
     //授予权限
      @Override
      public UserDto add(UserBasicDO userBasicDO){
@@ -75,14 +63,40 @@ public class UserServiceImpl implements UserService {
          }
         return  userDto;
      }
-    //获取单个用户基本信息
-    // @Override
-    // public UserInfoDto findOneInfo(Integer id){
-    //    return userInfoDOMapper.findOneInfo(id);
-    // }
-    //获取所有用户基本信息
-    // @Override
-    // public UserInfoDto findAllInfo(){
-    //    return userInfoDOMapper.findAllInfo();
-    // }
+
+    @Override
+    public UserDto selectPermissionStudent(){
+        List<UserBasicWithInfoDO> list=new ArrayList<>();
+        list=userBasicWithInfoMapper.selectPermissionStudent();
+        System.out.println(list);
+        UserDto userDto=new UserDto();
+        if(list.size() != 0){
+            userDto.setCode("ACK");
+            userDto.setData(list);
+            userDto.setMsg("查询成功");
+        }else{
+            userDto.setCode("NACK");
+            userDto.setMsg("查询失败");
+        }
+        return  userDto;
+    }
+    //获取权限列表
+    @Override
+    public UserDto selectAll(){
+        List<UserBasicWithInfoDO> list = new ArrayList<>();
+        list =userBasicWithInfoMapper.selectAll();
+        UserDto userDto=new UserDto();
+        if(list.size()!=0){
+            userDto.setCode("ACK");
+            userDto.setMsg("查询成功");
+            userDto.setData(list);
+        }else {
+            userDto.setCode("NACK");
+            userDto.setMsg("查询失败");
+        }
+        return  userDto;
+    }
+
+
+
 }
