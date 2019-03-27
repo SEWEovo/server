@@ -3,6 +3,8 @@
 <mapper namespace="com.admin.demo.dao.ActivitiesDOMapper">
   <resultMap id="BaseResultMap" type="com.admin.demo.data.ActivitiesDO">
     <id column="activites_id" jdbcType="INTEGER" property="activitesId" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="des" jdbcType="VARCHAR" property="des" />
@@ -20,8 +22,8 @@
     <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
   <sql id="Base_Column_List">
-    activites_id, user_id, name, des, content, place, time, deadline, num, welfare, type, 
-    toplace, totime, year, longtime, status
+    activites_id, phone, user_name, user_id, name, des, content, place, time, deadline, 
+    num, welfare, type, toplace, totime, year, longtime, status
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -29,38 +31,46 @@
     from v_activities
     where activites_id = #{activitesId,jdbcType=INTEGER}
   </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from v_activities
+    where activites_id = #{activitesId,jdbcType=INTEGER}
+  </delete>
   <select id="selectAll" parameterType="com.admin.demo.data.ActivitiesDO" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from v_activities
     <where>
-    <if test="activitesId != null ">activites_id=#{activitesId}</if>
-    <if test="status != null ">and status=#{status}</if>
+      <if test="activitesId != null ">activites_id=#{activitesId}</if>
+      <if test="status != null ">and status=#{status}</if>
     </where>
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from v_activities
-    where activites_id = #{activitesId,jdbcType=INTEGER}
-  </delete>
   <insert id="insert" parameterType="com.admin.demo.data.ActivitiesDO">
-    insert into v_activities (activites_id, user_id, name, 
-      des, content, place, 
-      time, deadline, num, 
-      welfare, type, toplace, 
-      totime, year, longtime,
-      status)
-    values (#{activitesId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
-      #{des,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, 
-      #{time,jdbcType=TIMESTAMP}, #{deadline,jdbcType=TIMESTAMP}, #{num,jdbcType=INTEGER}, 
-      #{welfare,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{toplace,jdbcType=VARCHAR}, 
-      #{totime,jdbcType=TIMESTAMP}, #{year,jdbcType=VARCHAR}, #{longtime,jdbcType=INTEGER},
-      0)
+    insert into v_activities (activites_id, phone, user_name, 
+      user_id, name, des, 
+      content, place, time, 
+      deadline, num, welfare, 
+      type, toplace, totime, 
+      year, longtime, status
+      )
+    values (#{activitesId,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{des,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
+      #{deadline,jdbcType=TIMESTAMP}, #{num,jdbcType=INTEGER}, #{welfare,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{toplace,jdbcType=VARCHAR}, #{totime,jdbcType=TIMESTAMP}, 
+      #{year,jdbcType=VARCHAR}, #{longtime,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.admin.demo.data.ActivitiesDO">
     insert into v_activities
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="activitesId != null">
         activites_id,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="userName != null">
+        user_name,
       </if>
       <if test="userId != null">
         user_id,
@@ -112,6 +122,12 @@
       <if test="activitesId != null">
         #{activitesId,jdbcType=INTEGER},
       </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
       </if>
@@ -152,7 +168,7 @@
         #{year,jdbcType=VARCHAR},
       </if>
       <if test="longtime != null">
-        #{longntime,jdbcType=INTEGER},
+        #{longtime,jdbcType=INTEGER},
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
@@ -162,6 +178,12 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.admin.demo.data.ActivitiesDO">
     update v_activities
     <set>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
       <if test="userId != null">
         user_id = #{userId,jdbcType=INTEGER},
       </if>
@@ -212,7 +234,9 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.admin.demo.data.ActivitiesDO">
     update v_activities
-    set user_id = #{userId,jdbcType=INTEGER},
+    set phone = #{phone,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
       name = #{name,jdbcType=VARCHAR},
       des = #{des,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},

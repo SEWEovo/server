@@ -42,23 +42,32 @@ public class ActivitiesServiceImpl implements ActivitiesService {
         }
         return  ActivitiesDto;
     }
-        @Override
-        public ActivitiesDto selectById(){
-             ActivitiesDO u =new ActivitiesDO();
-             u =activitiesDOMapper.selectByPrimaryKey(1);
-             ActivitiesDto ActivitiesDto=new ActivitiesDto();
-             if(u==null){
-                 ActivitiesDto.setCode("ACK");
-                 ActivitiesDto.setMsg("查询成功");
-                 ActivitiesDto.setData(u);
-             }else {
-                 ActivitiesDto.setCode("NACK");
-                 ActivitiesDto.setMsg("查询失败");
-             }
-             return  ActivitiesDto;
-        }
-        @Override
-        public int edit(){
-            return 1;
-        }
+      @Override
+     public ActivitiesDto edit(ActivitiesDO activity){
+         int result =activitiesDOMapper.updateByPrimaryKeySelective(activity);
+         ActivitiesDto ActivitiesDto=new ActivitiesDto();
+         if(result!=0){
+             ActivitiesDto.setCode("ACK");
+             ActivitiesDto.setMsg("编辑成功");
+         }else {
+             ActivitiesDto.setCode("NACK");
+             ActivitiesDto.setMsg("编辑失败");
+         }
+         return  ActivitiesDto;
+         }
+//    @Override
+//    public ActivitiesDto selectById(){
+//        ActivitiesDO u =new ActivitiesDO();
+//        u =activitiesDOMapper.selectByPrimaryKey(1);
+//        ActivitiesDto ActivitiesDto=new ActivitiesDto();
+//        if(u==null){
+//            ActivitiesDto.setCode("ACK");
+//            ActivitiesDto.setMsg("查询成功");
+//            ActivitiesDto.setData(u);
+//        }else {
+//            ActivitiesDto.setCode("NACK");
+//            ActivitiesDto.setMsg("查询失败");
+//        }
+//        return  ActivitiesDto;
+//    }
 }

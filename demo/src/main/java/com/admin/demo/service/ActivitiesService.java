@@ -5,7 +5,7 @@ import com.admin.demo.dto.ActivitiesDto;
 
 public interface ActivitiesService {
     ActivitiesDto publish(ActivitiesDO activity);
-    int edit();
+    ActivitiesDto edit(ActivitiesDO activitiesDO);
     ActivitiesDto selectAll(ActivitiesDO activitiesDO);
-    ActivitiesDto selectById();
+//    ActivitiesDto selectById();
 }

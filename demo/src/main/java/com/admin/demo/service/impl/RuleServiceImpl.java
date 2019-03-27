@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 public class RuleServiceImpl implements RuleService {
     @Autowired(required = true)
     private RuleDOMapper ruleDOMapper;
+    //更新规则信息
     @Override
     public RuleDto updateRule(RuleDO ruleDO) {
         int result = ruleDOMapper.updateByPrimaryKeySelective(ruleDO);
@@ -24,4 +25,20 @@ public class RuleServiceImpl implements RuleService {
         }
         return  ruleDto;
     }
+    //获取规则信息
+    @Override
+     public RuleDto getRule(Integer ruleId) {
+        RuleDO ruleDO=new RuleDO();
+         ruleDO = ruleDOMapper.selectByPrimaryKey(ruleId);
+         RuleDto ruleDto = new RuleDto();
+         if (ruleDO != null) {
+             ruleDto.setCode("ACK");
+             ruleDto.setMsg("查询成功");
+         } else {
+             ruleDto.setCode("NACK");
+             ruleDto.setMsg("查询失败");
+         }
+         return  ruleDto;
+     }
+
 }

@@ -24,6 +24,16 @@ public class RuleController {
     @PostMapping("/rule")
     public RuleDto updateRule(@RequestParam(required= false) Integer count, Integer totaltime,Integer evaluate){
         RuleDO ruleDO=new RuleDO();
+        ruleDO.setCount(count);
+        ruleDO.setTotaltime(totaltime);
+        ruleDO.setEvaluate(evaluate);
+        ruleDO.setRuleId(1);
         return ruleService.updateRule(ruleDO);
+    }
+    @ResponseBody
+    @PostMapping("/getRule")
+    public RuleDto getRule(){
+        Integer id=1;
+        return ruleService.getRule(id);
     }
 }

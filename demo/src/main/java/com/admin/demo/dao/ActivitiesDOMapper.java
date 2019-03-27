@@ -16,7 +16,6 @@ public interface ActivitiesDOMapper {
     int updateByPrimaryKeySelective(ActivitiesDO record);
 
     int updateByPrimaryKey(ActivitiesDO record);
-
     //根据条件获取志愿者活动
     List<ActivitiesDO> selectAll(ActivitiesDO record);
 }

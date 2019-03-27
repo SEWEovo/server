@@ -23,11 +23,11 @@ public class ActivitiesController {
     }
     @ResponseBody
     @PostMapping("/edit")
-    public ActivitiesDO edit(){
-        // return ActivitiesService.edit(account,password);
-        ActivitiesDO a=new ActivitiesDO();
-        return a;
+    public ActivitiesDto edit(@RequestParam(required= false) String  activity){
+        ActivitiesDO activitiesDO = JSON.parseObject(activity, ActivitiesDO.class);
+        return ActivitiesService.edit(activitiesDO);
     }
+    //可以获取单个或者多个 暂时为根据状态查询 修改参数即可
     @ResponseBody
     @GetMapping("/getAll")
     public ActivitiesDto getAll(@RequestParam(required= false) Integer id, @RequestParam(required= false) Integer status){
@@ -40,11 +40,11 @@ public class ActivitiesController {
         }
          return ActivitiesService.selectAll(activitiesDO);
     }
-    @ResponseBody
-    @GetMapping("/getOne")
-    public ActivitiesDO getOne(){
-        ActivitiesDO a=new ActivitiesDO();
-        return a;
-        // return ActivitiesService.selectById(account,password);
-    }
+//    @ResponseBody
+//    @GetMapping("/getOne")
+//    public ActivitiesDO getOne(){
+//        ActivitiesDO a=new ActivitiesDO();
+//        return a;
+//        // return ActivitiesService.selectById(account,password);
+//    }
 }

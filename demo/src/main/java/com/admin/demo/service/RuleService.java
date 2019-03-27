@@ -5,4 +5,5 @@ import com.admin.demo.dto.RuleDto;
 
 public interface RuleService {
     RuleDto updateRule(RuleDO ruleDO);
+    RuleDto getRule(Integer ruleId);
 }
