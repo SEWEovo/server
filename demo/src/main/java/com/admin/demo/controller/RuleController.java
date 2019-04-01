@@ -18,6 +18,7 @@ public class RuleController {
         ruleDO.setNum1(num1);
         ruleDO.setNum2(num2);
         ruleDO.setNum3(num3);
+        ruleDO.setRuleId(1);
         return ruleService.updateRule(ruleDO);
     }
     @ResponseBody
@@ -31,7 +32,7 @@ public class RuleController {
         return ruleService.updateRule(ruleDO);
     }
     @ResponseBody
-    @PostMapping("/getRule")
+    @GetMapping("/getRule")
     public RuleDto getRule(){
         Integer id=1;
         return ruleService.getRule(id);

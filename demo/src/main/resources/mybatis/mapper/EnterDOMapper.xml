@@ -28,8 +28,8 @@
       status, year, longtime, 
       score)
     values (#{enterId,jdbcType=INTEGER}, #{activitesId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
-      #{status,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{longtime,jdbcType=INTEGER}, 
-      #{score,jdbcType=INTEGER})
+      0, #{year,jdbcType=VARCHAR}, 0,
+      0)
   </insert>
   <insert id="insertSelective" parameterType="com.admin.demo.data.EnterDO">
     insert into v_enter

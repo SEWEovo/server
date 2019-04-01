@@ -22,13 +22,38 @@ public class ActivitiesServiceImpl implements ActivitiesService {
              if(list.size()!=0){
                  ActivitiesDto.setCode("ACK");
                  ActivitiesDto.setMsg("查询成功");
-                 ActivitiesDto.setList(list);
+                 ActivitiesDto.setData(list);
              }else {
                  ActivitiesDto.setCode("NACK");
                  ActivitiesDto.setMsg("查询失败");
              }
              return  ActivitiesDto;
         }
+    @Override
+    public ActivitiesDto getLast(){
+            Object result=activitiesDOMapper.getLast();
+//        List<ActivitiesDO> list = new ArrayList<ActivitiesDO>();
+//        list =activitiesDOMapper.getLast();
+        ActivitiesDto ActivitiesDto=new ActivitiesDto();
+        if(result !=null){
+            ActivitiesDto.setCode("ACK");
+            ActivitiesDto.setMsg("查询成功");
+            ActivitiesDto.setData(result);
+        }else {
+            ActivitiesDto.setCode("NACK");
+            ActivitiesDto.setMsg("查询失败");
+        }
+
+//        if(list.size()!=0){
+//            ActivitiesDto.setCode("ACK");
+//            ActivitiesDto.setMsg("查询成功");
+//            ActivitiesDto.setData(list);
+//        }else {
+//            ActivitiesDto.setCode("NACK");
+//            ActivitiesDto.setMsg("查询失败");
+//        }
+        return  ActivitiesDto;
+    }
     @Override
     public ActivitiesDto publish(ActivitiesDO ac){
         int result =activitiesDOMapper.insert(ac);

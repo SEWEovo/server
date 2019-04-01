@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.admin.demo.dao.EnterWithauDOMapper">
+
+    <sql id="EnterWidthauBaseColumns">
+        i.id as user_info_id,
+        i.user_id as i_user_id,
+        i.name as user_name,
+        i.college as college,
+        i.profession as profession,
+        i.class_num as class_num,
+        i.phone as phone,
+        a.activites_id as activites_id,
+        a.phone as a_phone,
+        a.user_name as a_user_name,
+        a.user_id as a_user_id,
+        a.name as activity_name,
+        a.des as des,
+        a.content as content,
+        a.place as place,
+        a.time as activity_time,
+        a.deadline as deadline,
+        a.num as num,
+        a.welfare as welfare,
+        a.type as a_type,
+        a.toplace as toplace,
+        a.totime as totime,
+        a.year as a_year,
+        a.longtime as a_longtime,
+        a.status as activity_status,
+        e.year as e_year,
+        e.enter_id as enter_id,
+        e.activites_id as e_activites_id,
+        e.user_id as e_user_id,
+        e.longtime as longtime,
+        e.score as score,
+        e.status as user_status
+    </sql>
+
+    <resultMap id="EnterWithauDOMap" type="com.admin.demo.data.EnterWithauDO">
+        <!-- 活动基本情况 -->
+        <result column="activity_name" property="activityName"/>
+        <result column="des" property="des" />
+        <!-- 参与用户基本情况 -->
+        <result column="user_name" property="userName" />
+        <result column="college" property="college" />
+        <result column="profession" property="profession" />
+        <result column="class_num" property="classNum" />
+        <result column="phone" property="phone" />
+        <result column="i_user_id" property="userId"/>
+        <!-- 实际参与年份 -->
+        <result column="e_year" property="year" />
+        <!-- 学生参与状态，管理员评价分数，最终时长     -->
+        <result column="longtime" property="longtime" />
+        <result column="score" property="score" />
+        <result column="user_status" property="userStatus" />
+    </resultMap>
+    <!-- <resultMap id="UserDOMap" type="com.admin.demo.data.UserBasicWithInfoDO">
+       <result column="activity_name" property="activityName">
+       <result column="des" property="des" />
+       <result column="activity_status" property="activityStatus" />
+       <result column="user_name" property="userName" />
+       <result column="college" property="college" />
+       <result column="profession" property="profession" />
+       <result column="class_num" property="classNum" />
+       <result column="phone" property="phone" />
+       <result column="year" property="year" />
+       <result column="longtime" property="longtime" />
+       <result column="score" property="score" />
+       <result column="user_status" property="userStatus" />
+   </resultMap> -->
+    <!-- 获取某个活动报名情况 -->
+    <select id="selectByActivity" resultMap="EnterWithauDOMap">
+        select <include refid="EnterWidthauBaseColumns" />
+        from v_activities a, userinfo i,v_enter e
+        where i.user_id =e.user_id
+        and a.activites_id= e.activites_id
+        and a.activites_id=#{activitesId}
+    </select>
+    <!-- 获取某个用户历史参与记录 根据年份分组 -->
+    <select id="selectByUser" resultMap="EnterWithauDOMap">
+        select <include refid="EnterWidthauBaseColumns" />
+        from v_activities a, userinfo i,v_enter e
+        where a.activites_id= e.activites_id
+        and  i.user_id = e.user_id
+        and i.user_id=#{userId}
+--         group by e.year
+    </select>
+    <!--批量更新某活动用户相关参与情况  -->
+    <!--<update id="update" parameterType="java.util.List">-->
+        <!--<foreach collection="userList" item="item" index="index"  separator=";">-->
+            <!--update v_enter-->
+            <!--<set>-->
+                <!--<if test="item.longtime != null and item.longtime != ''">longtime = #{item.longtime}, </if>-->
+                <!--<if test="item.score != null and item.score != ''">score = #{item.score}, </if>-->
+                <!--<if test="item.year != null and item.year != ''">year = #{item.year}, </if>-->
+                <!--<if test="item.status != null and item.status != ''">status = #{item.status}, </if>-->
+            <!--</set>-->
+            <!--where activities_id = #{item.activitiesId}-->
+        <!--</foreach>-->
+    <!--</update>-->
+</mapper>

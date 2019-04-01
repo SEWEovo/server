@@ -1,0 +1,53 @@
+package com.admin.demo.data;
+
+public class AwardDO {
+    private Long awardId;
+
+    private Long userId;
+
+    private Long scholarshipId;
+
+    private Integer isFilled;
+
+    private Integer yearScope;
+
+    public Long getAwardId() {
+        return awardId;
+    }
+
+    public void setAwardId(Long awardId) {
+        this.awardId = awardId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Long getScholarshipId() {
+        return scholarshipId;
+    }
+
+    public void setScholarshipId(Long scholarshipId) {
+        this.scholarshipId = scholarshipId;
+    }
+
+    public Integer getIsFilled() {
+        return isFilled;
+    }
+
+    public void setIsFilled(Integer isFilled) {
+        this.isFilled = isFilled;
+    }
+
+    public Integer getYearScope() {
+        return yearScope;
+    }
+
+    public void setYearScope(Integer yearScope) {
+        this.yearScope = yearScope;
+    }
+}

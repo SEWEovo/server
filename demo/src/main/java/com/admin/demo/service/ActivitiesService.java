@@ -7,5 +7,5 @@ public interface ActivitiesService {
     ActivitiesDto publish(ActivitiesDO activity);
     ActivitiesDto edit(ActivitiesDO activitiesDO);
     ActivitiesDto selectAll(ActivitiesDO activitiesDO);
-//    ActivitiesDto selectById();
+    ActivitiesDto getLast();
 }

@@ -31,6 +31,12 @@
     from v_activities
     where activites_id = #{activitesId,jdbcType=INTEGER}
   </select>
+  <select id="getLast" parameterType="com.admin.demo.data.ActivitiesDO" resultMap="BaseResultMap">
+    select
+    activites_id,status
+    from v_activities
+    order by activites_id DESC limit 1;
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from v_activities
     where activites_id = #{activitesId,jdbcType=INTEGER}
@@ -57,7 +63,7 @@
       #{content,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
       #{deadline,jdbcType=TIMESTAMP}, #{num,jdbcType=INTEGER}, #{welfare,jdbcType=VARCHAR}, 
       #{type,jdbcType=INTEGER}, #{toplace,jdbcType=VARCHAR}, #{totime,jdbcType=TIMESTAMP}, 
-      #{year,jdbcType=VARCHAR}, #{longtime,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}
+      #{year,jdbcType=VARCHAR}, #{longtime,jdbcType=INTEGER}, 0
       )
   </insert>
   <insert id="insertSelective" parameterType="com.admin.demo.data.ActivitiesDO">

@@ -13,6 +13,8 @@ public interface ActivitiesDOMapper {
 
     ActivitiesDO selectByPrimaryKey(Integer activitesId);
 
+    ActivitiesDO getLast();
+
     int updateByPrimaryKeySelective(ActivitiesDO record);
 
     int updateByPrimaryKey(ActivitiesDO record);

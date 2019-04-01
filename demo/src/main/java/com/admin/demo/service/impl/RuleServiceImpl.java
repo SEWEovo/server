@@ -34,6 +34,7 @@ public class RuleServiceImpl implements RuleService {
          if (ruleDO != null) {
              ruleDto.setCode("ACK");
              ruleDto.setMsg("查询成功");
+             ruleDto.setData(ruleDO);
          } else {
              ruleDto.setCode("NACK");
              ruleDto.setMsg("查询失败");

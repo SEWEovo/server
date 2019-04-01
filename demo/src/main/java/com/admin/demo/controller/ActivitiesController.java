@@ -40,11 +40,9 @@ public class ActivitiesController {
         }
          return ActivitiesService.selectAll(activitiesDO);
     }
-//    @ResponseBody
-//    @GetMapping("/getOne")
-//    public ActivitiesDO getOne(){
-//        ActivitiesDO a=new ActivitiesDO();
-//        return a;
-//        // return ActivitiesService.selectById(account,password);
-//    }
+    @ResponseBody
+    @GetMapping("/getLast")
+    public ActivitiesDto getLast(){
+      return ActivitiesService.getLast();
+    }
 }
