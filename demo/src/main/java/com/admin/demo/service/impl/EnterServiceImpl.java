@@ -34,6 +34,20 @@ public class EnterServiceImpl implements EnterService {
         }
         return  enterDto;
     }
+    //取消报名
+    @Override
+    public EnterDto del(Integer id){
+        int result =enterDOMapper.deleteByPrimaryKey(id);
+        EnterDto enterDto=new EnterDto();
+        if(result!=0){
+            enterDto.setCode("ACK");
+            enterDto.setMsg("取消报名成功");
+        }else {
+            enterDto.setCode("NACK");
+            enterDto.setMsg("取消报名失败");
+        }
+        return  enterDto;
+    }
     //获取某活动的用户报名情况
     @Override
     public EnterDto getByActivity(Integer activitesId){

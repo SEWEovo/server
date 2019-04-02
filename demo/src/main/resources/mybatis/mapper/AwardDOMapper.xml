@@ -2,73 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.admin.demo.dao.AwardDOMapper">
   <resultMap id="BaseResultMap" type="com.admin.demo.data.AwardDO">
-    <result column="award_id" jdbcType="BIGINT" property="awardId" />
-    <result column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="scholarship_id" jdbcType="BIGINT" property="scholarshipId" />
-    <result column="is_filled" jdbcType="INTEGER" property="isFilled" />
-    <result column="year_scope" jdbcType="INTEGER" property="yearScope" />
-  </resultMap>
-  <insert id="insert" parameterType="com.admin.demo.data.AwardDO">
-    insert into award (award_id, user_id, scholarship_id, 
-      is_filled, year_scope)
-    values (#{awardId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{scholarshipId,jdbcType=BIGINT}, 
-      #{isFilled,jdbcType=INTEGER}, #{yearScope,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" parameterType="com.admin.demo.data.AwardDO">
-    insert into award
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="awardId != null">
-        award_id,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="scholarshipId != null">
-        scholarship_id,
-      </if>
-      <if test="isFilled != null">
-        is_filled,
-      </if>
-      <if test="yearScope != null">
-        year_scope,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="awardId != null">
-        #{awardId,jdbcType=BIGINT},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="scholarshipId != null">
-        #{scholarshipId,jdbcType=BIGINT},
-      </if>
-      <if test="isFilled != null">
-        #{isFilled,jdbcType=INTEGER},
-      </if>
-      <if test="yearScope != null">
-        #{yearScope,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <resultMap id="BaseResultMap" type="com.admin.demo.data.AwardDO">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="college" jdbcType="VARCHAR" property="college" />
     <result column="profession" jdbcType="VARCHAR" property="profession" />
-    <result column="classNum" jdbcType="INTEGER" property="classnum" />
+    <result column="class_num" jdbcType="INTEGER" property="classNum" />
     <result column="level" jdbcType="INTEGER" property="level" />
     <result column="year" jdbcType="INTEGER" property="year" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_id, name, college, profession, classNum, level, year
+    id, user_id, name, college, profession, class_num, level, year
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from award
-    where id = #{id,jdbcType=INTEGER}
+    where year = #{year,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from award
@@ -76,10 +26,10 @@
   </delete>
   <insert id="insert" parameterType="com.admin.demo.data.AwardDO">
     insert into award (id, user_id, name, 
-      college, profession, classNum, 
+      college, profession, class_num, 
       level, year)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
-      #{college,jdbcType=VARCHAR}, #{profession,jdbcType=VARCHAR}, #{classnum,jdbcType=INTEGER}, 
+      #{college,jdbcType=VARCHAR}, #{profession,jdbcType=VARCHAR}, #{classNum,jdbcType=INTEGER}, 
       #{level,jdbcType=INTEGER}, #{year,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.admin.demo.data.AwardDO">
@@ -100,8 +50,8 @@
       <if test="profession != null">
         profession,
       </if>
-      <if test="classnum != null">
-        classNum,
+      <if test="classNum != null">
+        class_num,
       </if>
       <if test="level != null">
         level,
@@ -126,8 +76,8 @@
       <if test="profession != null">
         #{profession,jdbcType=VARCHAR},
       </if>
-      <if test="classnum != null">
-        #{classnum,jdbcType=INTEGER},
+      <if test="classNum != null">
+        #{classNum,jdbcType=INTEGER},
       </if>
       <if test="level != null">
         #{level,jdbcType=INTEGER},
@@ -152,8 +102,8 @@
       <if test="profession != null">
         profession = #{profession,jdbcType=VARCHAR},
       </if>
-      <if test="classnum != null">
-        classNum = #{classnum,jdbcType=INTEGER},
+      <if test="classNum != null">
+        class_num = #{classNum,jdbcType=INTEGER},
       </if>
       <if test="level != null">
         level = #{level,jdbcType=INTEGER},
@@ -170,7 +120,7 @@
       name = #{name,jdbcType=VARCHAR},
       college = #{college,jdbcType=VARCHAR},
       profession = #{profession,jdbcType=VARCHAR},
-      classNum = #{classnum,jdbcType=INTEGER},
+      class_num = #{classNum,jdbcType=INTEGER},
       level = #{level,jdbcType=INTEGER},
       year = #{year,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}

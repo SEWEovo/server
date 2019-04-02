@@ -1,53 +1,83 @@
 package com.admin.demo.data;
 
 public class AwardDO {
-    private Long awardId;
+    private Integer id;
 
-    private Long userId;
+    private Integer userId;
 
-    private Long scholarshipId;
+    private String name;
 
-    private Integer isFilled;
+    private String college;
 
-    private Integer yearScope;
+    private String profession;
 
-    public Long getAwardId() {
-        return awardId;
+    private Integer classNum;
+
+    private Integer level;
+
+    private Integer year;
+
+    public Integer getId() {
+        return id;
     }
 
-    public void setAwardId(Long awardId) {
-        this.awardId = awardId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public Long getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
-    public Long getScholarshipId() {
-        return scholarshipId;
+    public String getName() {
+        return name;
     }
 
-    public void setScholarshipId(Long scholarshipId) {
-        this.scholarshipId = scholarshipId;
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
-    public Integer getIsFilled() {
-        return isFilled;
+    public String getCollege() {
+        return college;
     }
 
-    public void setIsFilled(Integer isFilled) {
-        this.isFilled = isFilled;
+    public void setCollege(String college) {
+        this.college = college == null ? null : college.trim();
     }
 
-    public Integer getYearScope() {
-        return yearScope;
+    public String getProfession() {
+        return profession;
     }
 
-    public void setYearScope(Integer yearScope) {
-        this.yearScope = yearScope;
+    public void setProfession(String profession) {
+        this.profession = profession == null ? null : profession.trim();
+    }
+
+    public Integer getClassNum() {
+        return classNum;
+    }
+
+    public void setClassNum(Integer classNum) {
+        this.classNum = classNum;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
     }
 }

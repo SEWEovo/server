@@ -7,4 +7,6 @@ public interface EnterService {
     EnterDto insertOne(EnterDO enterDO);
     EnterDto getByActivity(Integer activitesId);
     EnterDto getByUser(Integer userId);
+    EnterDto del(Integer id);
+
 }

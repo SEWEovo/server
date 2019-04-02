@@ -20,6 +20,12 @@ public class EnterController {
         EnterDO enterDO = JSON.parseObject(info, EnterDO.class);
         return enterService.insertOne(enterDO);
     }
+    //用户取消报名
+    @ResponseBody
+    @PostMapping("/delOne")
+    public EnterDto delOne(@RequestParam(required= false) Integer id){
+        return enterService.del(id);
+    }
     //获取某个活动的报名情况 多张表
     @ResponseBody
     @GetMapping("/getByActivity")

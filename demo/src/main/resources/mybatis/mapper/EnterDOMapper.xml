@@ -21,7 +21,7 @@
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from v_enter
-    where enter_id = #{enterId,jdbcType=INTEGER}
+    where enter_id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.admin.demo.data.EnterDO">
     insert into v_enter (enter_id, activites_id, user_id, 

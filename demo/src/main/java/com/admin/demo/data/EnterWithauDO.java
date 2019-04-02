@@ -13,6 +13,16 @@ public class EnterWithauDO {
     private Integer score;
     private Integer userStatus;
 
+    public Integer getEnterId() {
+        return enterId;
+    }
+
+    public void setEnterId(Integer enterId) {
+        this.enterId = enterId;
+    }
+
+    private  Integer enterId;
+
     public Integer getUserId() {
         return userId;
     }

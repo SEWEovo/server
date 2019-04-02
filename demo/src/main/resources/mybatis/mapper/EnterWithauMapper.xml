@@ -51,6 +51,8 @@
         <result column="i_user_id" property="userId"/>
         <!-- 实际参与年份 -->
         <result column="e_year" property="year" />
+        <result column="enter_id" property="enterId" />
+
         <!-- 学生参与状态，管理员评价分数，最终时长     -->
         <result column="longtime" property="longtime" />
         <result column="score" property="score" />
