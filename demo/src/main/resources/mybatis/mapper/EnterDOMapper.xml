@@ -10,6 +10,11 @@
     <result column="longtime" jdbcType="INTEGER" property="longtime" />
     <result column="score" jdbcType="INTEGER" property="score" />
   </resultMap>
+  <resultMap id="BaseMap" type="com.admin.demo.data.EnterTotal">
+    <result column="year" jdbcType="VARCHAR" property="year" />
+    <result column="totaltime" jdbcType="INTEGER" property="totaltime" />
+    <result column="times" jdbcType="INTEGER" property="times" />
+  </resultMap>
   <sql id="Base_Column_List">
     enter_id, activites_id, user_id, status, year, longtime, score
   </sql>
@@ -18,6 +23,16 @@
     <include refid="Base_Column_List" />
     from v_enter
     where enter_id = #{enterId,jdbcType=INTEGER}
+  </select>
+  <select id="selectEnter" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from v_enter
+    where user_id = #{userId,jdbcType=INTEGER}
+    and  activites_id= #{activitesId,jdbcType=INTEGER}
+  </select>
+  <select id="getUserTotal" parameterType="java.lang.Integer" resultMap="BaseMap">
+ select sum(longtime) as totaltime,count(*) as times,year from v_enter where user_id=#{userId,jdbcType=INTEGER} group by year
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from v_enter
@@ -114,4 +129,14 @@
       score = #{score,jdbcType=INTEGER}
     where enter_id = #{enterId,jdbcType=INTEGER}
   </update>
+  <select id="selectVolunteerScore" parameterType="com.admin.demo.query.VolunteerScoreQuery" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from v_enter
+    where status = 1
+    and year = #{year}
+    and user_id in
+    <foreach collection="volunteerIds" item="volunteerId" index="index" open="(" close=")" separator=",">
+      #{volunteerId}
+    </foreach>
+  </select>
 </mapper>

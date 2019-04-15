@@ -14,4 +14,7 @@ public interface RuleDOMapper {
     int updateByPrimaryKeySelective(RuleDO record);
 
     int updateByPrimaryKey(RuleDO record);
+
+    RuleDO selectFirst();
+
 }

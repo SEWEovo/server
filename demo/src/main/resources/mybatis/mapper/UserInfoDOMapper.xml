@@ -110,4 +110,8 @@
       phone = #{phone,jdbcType=INTEGER}
     where user_id = #{userId,jdbcType=VARCHAR}
   </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from userinfo
+  </select>
 </mapper>

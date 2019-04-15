@@ -6,6 +6,8 @@ import com.admin.demo.dto.UserDto;
 
 public interface UserService {
     UserDto login(String account, String password);
+
+    UserDto loginAdmin(String account,String password,Integer type);
     //添加权限
     UserDto  add(UserBasicDO userBasicDO);
     //删除权限

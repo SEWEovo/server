@@ -23,4 +23,10 @@ public class AwardController {
     public AwardDto getByYear(@RequestParam(required= false) Integer year){
         return awardService.getByYear(year);
     }
+    //查询学生的荣誉记录
+    @ResponseBody
+    @GetMapping("/getByUser")
+    public AwardDto getByUser(@RequestParam(required= false) Integer id){
+        return awardService.getByUser(id);
+    }
 }

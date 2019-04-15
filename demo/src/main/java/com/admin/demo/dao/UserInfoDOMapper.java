@@ -2,6 +2,8 @@ package com.admin.demo.dao;
 
 import com.admin.demo.data.UserInfoDO;
 
+import java.util.List;
+
 public interface UserInfoDOMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface UserInfoDOMapper {
     int updateByPrimaryKeySelective(UserInfoDO record);
 
     int updateByPrimaryKey(UserInfoDO record);
+
+    List<UserInfoDO> selectAll();
 }

@@ -24,11 +24,25 @@ import java.util.List;
              awardDto.setData(list);
              awardDto.setMsg("查询成功");
          }else {
-             awardDto.setCode("NACK");
-             awardDto.setMsg("查询失败");
+             awardDto.setCode("ACK");
          }
          return  awardDto;
      }
+    @Override
+    public AwardDto getByUser(Integer id){
+        List<AwardDO> list=new ArrayList<>();
+        list=awardDOMapper.selectByUser(id);
+        System.out.println(list);
+        AwardDto awardDto=new AwardDto();
+        if(list.size()!=0){
+            awardDto.setCode("ACK");
+            awardDto.setData(list);
+            awardDto.setMsg("查询成功");
+        }else {
+            awardDto.setCode("NACK");
+        }
+        return  awardDto;
+    }
 //     @Override
 //     public AwardDto insertAll(List<AwardDO> awardDO){
 //         int result=awardDOMapper.insertAll(awardDO);

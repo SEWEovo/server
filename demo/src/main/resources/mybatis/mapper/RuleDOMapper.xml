@@ -114,4 +114,10 @@
       evaluate = #{evaluate,jdbcType=INTEGER}
     where rule_id = #{ruleId,jdbcType=INTEGER}
   </update>
+
+  <select id="selectFirst" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" />
+    from rule limit 0, 1;
+  </select>
+
 </mapper>

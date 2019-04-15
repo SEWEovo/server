@@ -1,5 +1,7 @@
 package com.admin.demo.data;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class ActivitiesDO {
@@ -18,9 +20,9 @@ public class ActivitiesDO {
     private String content;
 
     private String place;
-
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date time;
-
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date deadline;
 
     private Integer num;
@@ -30,7 +32,7 @@ public class ActivitiesDO {
     private Integer type;
 
     private String toplace;
-
+    @DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date totime;
 
     private String year;

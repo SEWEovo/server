@@ -34,6 +34,21 @@ public class UserServiceImpl implements UserService {
         }
         return  userDto;
     }
+    //后台管理中心登录
+    @Override
+    public UserDto loginAdmin(String account,String password,Integer type){
+        UserBasicDO u =userBasicDOMapper.login(account,password);
+        UserDto userDto=new UserDto();
+        if(u!=null&& u.getType()!=0){
+            userDto.setCode("ACK");
+            userDto.setData(u);
+            userDto.setMsg("登录成功");
+        }else {
+            userDto.setCode("NACK");
+            userDto.setMsg("没有权限访问");
+        }
+        return  userDto;
+    }
     //授予权限
      @Override
      public UserDto add(UserBasicDO userBasicDO){
@@ -75,8 +90,8 @@ public class UserServiceImpl implements UserService {
             userDto.setData(list);
             userDto.setMsg("查询成功");
         }else{
-            userDto.setCode("NACK");
-            userDto.setMsg("查询失败");
+            userDto.setCode("ACK");
+            userDto.setMsg("暂无数据");
         }
         return  userDto;
     }
@@ -91,8 +106,8 @@ public class UserServiceImpl implements UserService {
             userDto.setMsg("查询成功");
             userDto.setData(list);
         }else {
-            userDto.setCode("NACK");
-            userDto.setMsg("查询失败");
+            userDto.setCode("ACK");
+            userDto.setMsg("暂无数据");
         }
         return  userDto;
     }
@@ -108,7 +123,7 @@ public class UserServiceImpl implements UserService {
             userDto.setData(userInfoDO);
         }else {
             userDto.setCode("NACK");
-            userDto.setMsg("查询失败");
+            userDto.setMsg("用户不存在");
         }
         return  userDto;
     }

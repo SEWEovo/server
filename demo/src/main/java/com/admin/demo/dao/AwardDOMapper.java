@@ -11,7 +11,9 @@ public interface AwardDOMapper {
 
     int insertSelective(AwardDO record);
 
-    List<AwardDO> selectByPrimaryKey(Integer id);
+    List<AwardDO> selectByPrimaryKey(Integer year);
+
+    List<AwardDO> selectByUser(Integer id);
 
     int updateByPrimaryKeySelective(AwardDO record);
 

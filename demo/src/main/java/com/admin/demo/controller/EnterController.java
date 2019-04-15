@@ -44,4 +44,10 @@ public class EnterController {
 //    public EnterDto getByActivity(@RequestParam(required= false) String ){
 //        return enterService.updateByUser(activitesId);
 //    }
+    //获取某个用户每年的志愿记录
+    @ResponseBody
+    @GetMapping("/getUserTotal")
+    public EnterDto getUserTotal(@RequestParam(required= false) Integer userId){
+        return enterService.getUserTotal(userId);
+    }
 }
