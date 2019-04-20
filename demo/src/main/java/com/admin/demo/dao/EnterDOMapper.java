@@ -25,4 +25,8 @@ public interface EnterDOMapper {
 
     List<EnterTotal> getUserTotal(Integer userId);
 
+    List<EnterDO>  getNum(Integer activitesId);
+
+    int updateAll(List<EnterDO> list);
+
 }

@@ -1,6 +1,8 @@
 package com.admin.demo.data;
 
-public class AwardDO {
+import java.io.Serializable;
+
+public class AwardDO implements Serializable {
     private Integer id;
 
     private Integer userId;

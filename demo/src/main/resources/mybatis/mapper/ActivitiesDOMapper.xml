@@ -31,16 +31,26 @@
     from v_activities
     where activites_id = #{activitesId,jdbcType=INTEGER}
   </select>
-  <select id="getLast" parameterType="com.admin.demo.data.ActivitiesDO" resultMap="BaseResultMap">
+  <select id="selectNum" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select num from v_activities
+    where activites_id = #{activitesId,jdbcType=INTEGER}
+  </select>
+  <select id="getLast" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     activites_id,status
     from v_activities
+    where user_id=#{user_id}
     order by activites_id DESC limit 1;
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from v_activities
     where activites_id = #{activitesId,jdbcType=INTEGER}
   </delete>
+  <select id="selectByPublish" parameterType="com.admin.demo.data.ActivitiesDO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from v_activities where user_id= #{userId,jdbcType=INTEGER}
+  </select>
   <select id="selectAll" parameterType="com.admin.demo.data.ActivitiesDO" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
@@ -50,7 +60,7 @@
       <if test="status != null ">and status=#{status}</if>
     </where>
   </select>
-  <insert id="insert" parameterType="com.admin.demo.data.ActivitiesDO">
+  <insert id="insert"  useGeneratedKeys="true" keyProperty="activitesId" parameterType="com.admin.demo.data.ActivitiesDO">
     insert into v_activities (activites_id, phone, user_name, 
       user_id, name, des, 
       content, place, time, 
@@ -258,5 +268,11 @@
       longtime = #{longtime,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER}
     where activites_id = #{activitesId,jdbcType=INTEGER}
+  </update>
+  <update id="updateStatus" parameterType="java.lang.Integer">
+    update v_activities
+    set
+      status = 3
+    where activites_id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

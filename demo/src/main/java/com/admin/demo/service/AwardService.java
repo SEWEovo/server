@@ -11,5 +11,5 @@ public interface AwardService {
     AwardDto getByUser(Integer id);
 
      //生成当年星级志愿者
-//      AwardDto insertAll(List<AwardDO> awardDO);
+      AwardDto insertAll(List<AwardDO> resultList);
  }

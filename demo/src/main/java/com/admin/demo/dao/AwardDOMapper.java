@@ -18,4 +18,7 @@ public interface AwardDOMapper {
     int updateByPrimaryKeySelective(AwardDO record);
 
     int updateByPrimaryKey(AwardDO record);
+
+    int insertAll(List<AwardDO> resultList);
+
 }

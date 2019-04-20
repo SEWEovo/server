@@ -19,7 +19,6 @@ public class ActivitiesController {
     public ActivitiesDto publish(@RequestParam(required= false) String  activity){
         ActivitiesDO activitiesDO = JSON.parseObject(activity, ActivitiesDO.class);
         return ActivitiesService.publish(activitiesDO);
-
     }
     @ResponseBody
     @PostMapping("/edit")
@@ -40,9 +39,23 @@ public class ActivitiesController {
         }
          return ActivitiesService.selectAll(activitiesDO);
     }
+    //可以获取单个或者多个 暂时为根据状态查询 修改参数即可
+    @ResponseBody
+    @GetMapping("/selectByPublish")
+    public ActivitiesDto selectByPublish(@RequestParam(required= false) Integer userId){
+        ActivitiesDO activitiesDO=new ActivitiesDO();
+        activitiesDO.setUserId(userId);
+        return ActivitiesService.selectByPublish(activitiesDO);
+    }
     @ResponseBody
     @GetMapping("/getLast")
-    public ActivitiesDto getLast(){
-      return ActivitiesService.getLast();
+    public ActivitiesDto getLast(@RequestParam(required= false) Integer userId){
+      return ActivitiesService.getLast(userId);
+    }
+
+    @ResponseBody
+    @PostMapping("/updateStatus")
+    public ActivitiesDto updateStatus(@RequestParam(required= false) Integer id){
+        return ActivitiesService.updateStatus(id);
     }
 }

@@ -3,6 +3,7 @@ package com.admin.demo.service.impl;
 import com.admin.demo.dao.ActivitiesDOMapper;
 import com.admin.demo.dao.EnterDOMapper;
 import com.admin.demo.dao.EnterWithauDOMapper;
+import com.admin.demo.data.ActivitiesDO;
 import com.admin.demo.data.EnterDO;
 import com.admin.demo.data.EnterTotal;
 import com.admin.demo.data.EnterWithauDO;
@@ -20,30 +21,44 @@ public class EnterServiceImpl implements EnterService {
     private EnterWithauDOMapper enterWithauDOMapper;
     @Autowired(required = true)
     private  EnterDOMapper enterDOMapper;
+    @Autowired(required = true)
+    private  ActivitiesDOMapper activitiesDOMapper;
     //报名
     @Override
     public EnterDto insertOne(EnterDO enterDO){
         EnterDto enterDto=new EnterDto();
        EnterDO e=enterDOMapper.selectEnter(enterDO);
-       System.out.println(e);
         if(e!=null){
             enterDto.setCode("ACK");
             enterDto.setMsg("不可重复报名");
             return  enterDto;
         }
         else{
-            int result =enterDOMapper.insert(enterDO);
             //需要在插入之前查询num数是否已满
-            if(result!=0){
-                enterDto.setCode("ACK");
-                enterDto.setMsg("报名成功");
+            Integer activitesId= enterDO.getActivitesId();
+            //需要人数
+            ActivitiesDO activitiesDO=activitiesDOMapper.selectNum(activitesId);
+            int needNum=activitiesDO.getNum();
+            //实际报名人数
+            List<EnterDO> enterDOS=enterDOMapper.getNum(activitesId);
+            int nowNum=enterDOS.size();
+            //需要的人数大于实际报名人数，报名数未满
+            if(needNum>nowNum){
+                int result =enterDOMapper.insert(enterDO);
+                if(result!=0){
+                    enterDto.setCode("ACK");
+                    enterDto.setMsg("报名成功");
+                }else {
+                    enterDto.setCode("NACK");
+                    enterDto.setMsg("报名失败");
+                }
+                return  enterDto;
             }else {
-                enterDto.setCode("NACK");
-                enterDto.setMsg("报名失败");
+                enterDto.setCode("ACK");
+                enterDto.setMsg("报名人数已满");
+                return  enterDto;
             }
-            return  enterDto;
         }
-
     }
     //取消报名
     @Override
@@ -107,6 +122,20 @@ public class EnterServiceImpl implements EnterService {
             enterDto.setMsg("暂无数据");
         }
         return  enterDto;
+    }
+    //批量更新
+    @Override
+    public EnterDto updateAll(List<EnterDO> resultList){
+        int result=enterDOMapper.updateAll(resultList);
+        EnterDto awardDto=new EnterDto();
+        if(result !=-1){
+            awardDto.setCode("ACK");
+            awardDto.setMsg("更新成功");
+        }else {
+            awardDto.setCode("NACK");
+            awardDto.setMsg("更新失败");
+        }
+        return  awardDto;
     }
 
 }

@@ -8,7 +8,6 @@
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="year" jdbcType="VARCHAR" property="year" />
     <result column="longtime" jdbcType="INTEGER" property="longtime" />
-    <result column="score" jdbcType="INTEGER" property="score" />
   </resultMap>
   <resultMap id="BaseMap" type="com.admin.demo.data.EnterTotal">
     <result column="year" jdbcType="VARCHAR" property="year" />
@@ -16,7 +15,7 @@
     <result column="times" jdbcType="INTEGER" property="times" />
   </resultMap>
   <sql id="Base_Column_List">
-    enter_id, activites_id, user_id, status, year, longtime, score
+    enter_id, activites_id, user_id, status, year, longtime
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -34,17 +33,19 @@
   <select id="getUserTotal" parameterType="java.lang.Integer" resultMap="BaseMap">
  select sum(longtime) as totaltime,count(*) as times,year from v_enter where user_id=#{userId,jdbcType=INTEGER} group by year
   </select>
+  <select id="getNum" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+ select * from v_enter where activites_id= #{activitesId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from v_enter
     where enter_id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.admin.demo.data.EnterDO">
     insert into v_enter (enter_id, activites_id, user_id, 
-      status, year, longtime, 
-      score)
+      status, year, longtime
+      )
     values (#{enterId,jdbcType=INTEGER}, #{activitesId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
-      0, #{year,jdbcType=VARCHAR}, 0,
-      0)
+      0, 0, 0)
   </insert>
   <insert id="insertSelective" parameterType="com.admin.demo.data.EnterDO">
     insert into v_enter
@@ -67,9 +68,7 @@
       <if test="longtime != null">
         longtime,
       </if>
-      <if test="score != null">
-        score,
-      </if>
+
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="enterId != null">
@@ -89,9 +88,6 @@
       </if>
       <if test="longtime != null">
         #{longtime,jdbcType=INTEGER},
-      </if>
-      <if test="score != null">
-        #{score,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -113,9 +109,7 @@
       <if test="longtime != null">
         longtime = #{longtime,jdbcType=INTEGER},
       </if>
-      <if test="score != null">
-        score = #{score,jdbcType=INTEGER},
-      </if>
+
     </set>
     where enter_id = #{enterId,jdbcType=INTEGER}
   </update>
@@ -126,17 +120,26 @@
       status = #{status,jdbcType=INTEGER},
       year = #{year,jdbcType=VARCHAR},
       longtime = #{longtime,jdbcType=INTEGER},
-      score = #{score,jdbcType=INTEGER}
     where enter_id = #{enterId,jdbcType=INTEGER}
   </update>
   <select id="selectVolunteerScore" parameterType="com.admin.demo.query.VolunteerScoreQuery" resultMap="BaseResultMap">
     select <include refid="Base_Column_List" />
     from v_enter
-    where status = 1
+    where status = 2
     and year = #{year}
     and user_id in
     <foreach collection="volunteerIds" item="volunteerId" index="index" open="(" close=")" separator=",">
       #{volunteerId}
     </foreach>
   </select>
+  <update id="updateAll" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" open="" close="" separator=";">
+      update v_enter set
+      status = ${item.status},
+      year = ${item.year},
+      longtime = ${item.longtime}
+      where user_id = ${item.userId}
+      and enter_id = ${item.enterId}
+    </foreach>
+  </update>
 </mapper>

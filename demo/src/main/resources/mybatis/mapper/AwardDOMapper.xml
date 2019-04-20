@@ -31,12 +31,24 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.admin.demo.data.AwardDO">
-    insert into award (id, user_id, name, 
+    insert into award (id, user_id, name,
       college, profession, class_num, 
       level, year)
-    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
       #{college,jdbcType=VARCHAR}, #{profession,jdbcType=VARCHAR}, #{classNum,jdbcType=INTEGER}, 
       #{level,jdbcType=INTEGER}, #{year,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertAll" parameterType="java.util.List">
+    insert into award (user_id, name,
+    college, profession, class_num,
+    level, year)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.userId,jdbcType=INTEGER}, #{item.name,jdbcType=VARCHAR},#{item.college,jdbcType=VARCHAR},
+      #{item.profession,jdbcType=VARCHAR}, #{item.classNum,jdbcType=INTEGER},#{item.level,jdbcType=INTEGER},
+      #{item.year,jdbcType=INTEGER})
+    </foreach>
+
   </insert>
   <insert id="insertSelective" parameterType="com.admin.demo.data.AwardDO">
     insert into award

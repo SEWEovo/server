@@ -43,17 +43,17 @@ import java.util.List;
         }
         return  awardDto;
     }
-//     @Override
-//     public AwardDto insertAll(List<AwardDO> awardDO){
-//         int result=awardDOMapper.insertAll(awardDO);
-//         AwardDto awardDto=new AwardDto();
-//         if(result !=-1){
-//             awardDto.setCode("ACK");
-//             awardDto.setMsg("生成成功");
-//         }else {
-//             awardDto.setCode("NACK");
-//             awardDto.setMsg("生成失败");
-//         }
-//         return  awardDto;
-//     }
+     @Override
+     public AwardDto insertAll(List<AwardDO> resultList){
+         int result=awardDOMapper.insertAll(resultList);
+         AwardDto awardDto=new AwardDto();
+         if(result !=-1){
+             awardDto.setCode("ACK");
+             awardDto.setMsg("生成成功");
+         }else {
+             awardDto.setCode("NACK");
+             awardDto.setMsg("生成失败");
+         }
+         return  awardDto;
+     }
  }

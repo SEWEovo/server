@@ -34,7 +34,6 @@
         e.activites_id as e_activites_id,
         e.user_id as e_user_id,
         e.longtime as longtime,
-        e.score as score,
         e.status as user_status
     </sql>
 
@@ -55,7 +54,6 @@
 
         <!-- 学生参与状态，管理员评价分数，最终时长     -->
         <result column="longtime" property="longtime" />
-        <result column="score" property="score" />
         <result column="user_status" property="userStatus" />
     </resultMap>
     <!-- <resultMap id="UserDOMap" type="com.admin.demo.data.UserBasicWithInfoDO">
