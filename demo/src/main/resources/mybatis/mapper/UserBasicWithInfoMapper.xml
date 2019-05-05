@@ -38,5 +38,11 @@
         where i.user_id = b.user_id
         and type = 0
     </select>
-
+    <select id="selectById" resultMap="UserBasicWithInfoDOMap">
+        select <include refid="UserBasicWithInfoBaseColumns" />
+        from userinfo i, userbasic b
+        where i.user_id = b.user_id
+        and type = 0
+        and i.user_id = #{userId}
+    </select>
 </mapper>

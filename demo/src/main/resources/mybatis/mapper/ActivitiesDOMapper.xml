@@ -73,7 +73,7 @@
       #{content,jdbcType=VARCHAR}, #{place,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, 
       #{deadline,jdbcType=TIMESTAMP}, #{num,jdbcType=INTEGER}, #{welfare,jdbcType=VARCHAR}, 
       #{type,jdbcType=INTEGER}, #{toplace,jdbcType=VARCHAR}, #{totime,jdbcType=TIMESTAMP}, 
-      #{year,jdbcType=VARCHAR}, #{longtime,jdbcType=INTEGER}, 0
+      #{year,jdbcType=VARCHAR}, #{longtime,jdbcType=INTEGER}, 1
       )
   </insert>
   <insert id="insertSelective" parameterType="com.admin.demo.data.ActivitiesDO">
@@ -272,7 +272,7 @@
   <update id="updateStatus" parameterType="java.lang.Integer">
     update v_activities
     set
-      status = 3
+      status = 2
     where activites_id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

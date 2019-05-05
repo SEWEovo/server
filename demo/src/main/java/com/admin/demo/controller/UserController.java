@@ -7,6 +7,7 @@ import com.admin.demo.dto.VolunteerScoreStatisticsDTO;
 import com.admin.demo.result.ResultDO;
 import com.admin.demo.service.UserService;
 import com.admin.demo.service.VolunteerScoreStatisticsService;
+import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -75,5 +76,10 @@ public class UserController {
     @GetMapping("/getTotal")
     public ResultDO<List<VolunteerScoreStatisticsDTO>> getTotal(String year){
         return volunteerScoreStatisticsService.queryVolunteerScopreStatistics(year);
+    }
+    @ResponseBody
+    @GetMapping("/selectById")
+    public UserDto selectById(Integer userId){
+        return userService.selectById(userId);
     }
 }

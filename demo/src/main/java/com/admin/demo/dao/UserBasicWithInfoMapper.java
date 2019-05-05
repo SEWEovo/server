@@ -9,5 +9,6 @@ public interface UserBasicWithInfoMapper {
 
     List<UserBasicWithInfoDO> selectPermissionStudent();
     List<UserBasicWithInfoDO> selectAll();
+    List<UserBasicWithInfoDO> selectById(Integer uId);
 
 }

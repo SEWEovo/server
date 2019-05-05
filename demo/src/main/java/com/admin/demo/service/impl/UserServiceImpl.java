@@ -142,6 +142,20 @@ public class UserServiceImpl implements UserService {
         return  userDto;
     }
 
-
+    @Override
+    public UserDto selectById(Integer userId){
+        List<UserBasicWithInfoDO> list=new ArrayList<>();
+        list=userBasicWithInfoMapper.selectById(userId);
+        UserDto userDto=new UserDto();
+        if(list.size() != 0){
+            userDto.setCode("ACK");
+            userDto.setData(list);
+            userDto.setMsg("查询成功");
+        }else{
+            userDto.setCode("ACK");
+            userDto.setMsg("暂无数据");
+        }
+        return  userDto;
+    }
 
 }

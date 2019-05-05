@@ -20,4 +20,6 @@ public interface UserService {
     UserDto selectInfo(Integer userId);
     //更新学生联系方式
     UserDto updateInfo(UserInfoDO userInfoDO);
+
+    UserDto selectById(Integer userId);
 }
